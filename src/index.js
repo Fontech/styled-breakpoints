@@ -10,7 +10,7 @@ export const defaultBreakpoints = {
   lgDesktop: '1200px',
 };
 
-const createAbove = breakpointsMap => breakpointKey => {
+const createMin = breakpointsMap => breakpointKey => {
   const ems = pixelsToEm(getBreakValue(breakpointKey, breakpointsMap));
   return `@media screen and (min-width: ${ems})`;
 };
@@ -38,16 +38,16 @@ const createOnly = breakpointsMap => breakpointKey => {
  * @return {Object} - Media generators for each breakpoint
  */
 export const createBreakpoints = (breakpoints = defaultBreakpoints) => {
-  const above = createAbove(breakpoints);
+  const min = createMin(breakpoints);
   const below = createBelow(breakpoints);
   const between = createBetween(breakpoints);
   const only = createOnly(breakpoints);
 
-  return { above, below, between, only };
+  return { min, below, between, only };
 };
 
 /**
  * Media object with default breakpoints
  * @return {object} - Media generators for each size
  */
-export const { above, below, between, only } = createBreakpoints();
+export const { min, below, between, only } = createBreakpoints();
