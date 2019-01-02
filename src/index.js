@@ -38,6 +38,20 @@ const createOnly = breakpointsMap => breakpointKey => {
  * @return {Object} - Media generators for each breakpoint
  */
 export const createBreakpoints = (breakpoints = defaultBreakpoints) => {
+  try {
+    const valuesOfBreakpoints = Object.values(breakpoints);
+    const repeatValues = valuesOfBreakpoints.filter((value, index, arr) => arr.indexOf(value) !== index);
+    if (repeatValues.length > 0) {
+      const isMore = repeatValues.length > 1;
+      const repeatString = repeatValues.join(', ');
+      throw new Error(
+        `styled-breakpoints: There ${isMore ? 'are duplicate values' : 'is a duplicate value'} (${repeatString}) in breakpoints`,
+      );
+    }
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
   const min = createMin(breakpoints);
   const max = createMax(breakpoints);
   const between = createBetween(breakpoints);
