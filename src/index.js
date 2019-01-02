@@ -15,7 +15,7 @@ const createMin = breakpointsMap => breakpointKey => {
   return `@media screen and (min-width: ${ems})`;
 };
 
-const createBelow = breakpointsMap => breakpointKey => {
+const createMax = breakpointsMap => breakpointKey => {
   const ems = pixelsToEm(getNextBreakValue(breakpointKey, breakpointsMap));
   return `@media screen and (max-width: ${ems})`;
 };
@@ -39,15 +39,15 @@ const createOnly = breakpointsMap => breakpointKey => {
  */
 export const createBreakpoints = (breakpoints = defaultBreakpoints) => {
   const min = createMin(breakpoints);
-  const below = createBelow(breakpoints);
+  const max = createMax(breakpoints);
   const between = createBetween(breakpoints);
   const only = createOnly(breakpoints);
 
-  return { min, below, between, only };
+  return { min, max, between, only };
 };
 
 /**
  * Media object with default breakpoints
  * @return {object} - Media generators for each size
  */
-export const { min, below, between, only } = createBreakpoints();
+export const { min, max, between, only } = createBreakpoints();
