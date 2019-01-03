@@ -1,6 +1,6 @@
 # styled-breakpoints
 
-Simple and powerfull css breakpoints for [styled-components](https://github.com/styled-components/styled-components).
+Simple and powerful css breakpoints for [styled-components](https://github.com/styled-components/styled-components).
 
 > You can use it with [emotion](https://github.com/emotion-js/emotion) too
 
@@ -15,11 +15,11 @@ Simple and powerfull css breakpoints for [styled-components](https://github.com/
 Use yarn or npm
 
 ```
-yarn add styled-breakpoints
+yarn add @sorosora/styled-breakpoints
 ```
 
 ```
-npm i styled-breakpoints
+npm i @sorosora/styled-breakpoints
 ```
 
 ## Get Started
@@ -28,20 +28,23 @@ The following values of breakpoints are used by default.
 
 ```js
 const defaultBreakpoints = {
-  tablet: '768px',
-  desktop: '992px',
-  lgDesktop: '1200px',
+  xs: '0px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1600px',
 };
 ```
 
 ```js
 import styled from 'styled-components';
-import { above, below, between, only } from 'styled-breakpoints';
+import { min, max, below, between, only } from 'styled-breakpoints';
 
 const SyledComponent = styled.div`
   background-color: pink;
 
-  ${above('tablet')} {
+  ${min('md')} {
     background-color: hotpink;
   }
 `;
@@ -61,11 +64,11 @@ div {
 }
 ```
 
-### Above
+### Min
 
 ```js
 css`
-  ${above('tablet')} {
+  ${min('md')} {
     background-color: hotpink;
   }
 `;
@@ -81,11 +84,11 @@ Converts to:
 }
 ```
 
-### Below
+### Max
 
 ```js
 css`
-  ${below('desktop')} {
+  ${max('lg')} {
     background-color: lightcoral;
   }
 `;
@@ -102,11 +105,32 @@ Converts to:
 }
 ```
 
+### Below
+
+```js
+css`
+  ${max('sm')} {
+    background-color: aliceblue;
+  }
+`;
+```
+
+Converts to:
+
+```css
+/* (576px - 0.02px) / 16px */
+@media screen and (max-width: 35.99875em) {
+  div {
+    background-color: aliceblue;
+  }
+}
+```
+
 ### Between
 
 ```js
 css`
-  ${between('tablet', 'desktop')} {
+  ${between('md', 'lg')} {
     background-color: hotpink;
   }
 `;
@@ -115,7 +139,7 @@ css`
 Converts to:
 
 ```css
-/* 778px / 16px                  (1200px - 0.02px) / 16px */
+/* 768px / 16px                  (1200px - 0.02px) / 16px */
 @media screen and (min-width: 48em) and (max-width: 74.99875em) {
   div {
     background-color: hotpink;
@@ -127,7 +151,7 @@ Converts to:
 
 ```js
 css`
-  ${only('tablet')} {
+  ${only('md')} {
     background-color: rebeccapurple;
   }
 `;
@@ -137,12 +161,60 @@ Converts to:
 
 ```css
 /*
-  778px / 16px                  (992px - 0.02px) / 16px */
+  768px / 16px                  (992px - 0.02px) / 16px */
 @media screen and (min-width: 48em) and (max-width: 61.99875em) {
   div {
     background-color: rebeccapurple;
   }
 }
+```
+
+### Recommended usage
+
+Mobile-first
+
+| xs | sm | md | lg | xl | xxl |
+| --- | --- | --- | --- | --- | --- |
+| <576px | ≥576px | ≥768px | ≥992px | ≥1200px | ≥1600px |
+|  | min('sm') | min('md') | min('lg') | min('xl') | min('xxl') |
+
+```js
+const StyledComponent = styled.div`
+  /* xs */
+
+  ${min('sm')} {
+    /* sm */
+  }
+
+  ${min('md')} {
+    /* md */
+  }
+
+  ...and so on
+`;
+```
+
+Desktop-first
+
+| xs | sm | md | lg | xl | xxl |
+| --- | --- | --- | --- | --- | --- |
+| <576px | <768px | <992px | <1200px | <1600px | ≥1600px |
+| max('xs') | max('sm') | max('md') | max('lg') | max('xl') |  |
+
+```js
+const StyledComponent = styled.div`
+  /* xxl */
+
+  ${max('xl')} {
+    /* xl */
+  }
+
+  ${max('lg')} {
+    /* lg */
+  }
+
+  ...and so on
+`;
 ```
 
 ### Custom breakpoints
@@ -151,17 +223,18 @@ Converts to:
 import styled from 'styled-components';
 import { createBreakpoints } from 'styled-breakpoints';
 
-const { above, below, between, only } = createBreakpoints({
-  sm: '576px',
-  md: '768px',
-  lg: '992px',
-  xl: '1200px',
-});
+const breakpoints = {
+  phone: '0px', // feel free to set the smallest breakpoint
+  tablet: '768px',
+  desktop: '1200px',
+}
+
+const { min, max, below, between, only } = createBreakpoints(breakpoints);
 
 const StyledComponent = styled.div`
   background-color: pink;
 
-  ${above('md')} {
+  ${min('tablet')} {
     background-color: hotpink;
   }
 `;
