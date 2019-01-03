@@ -10,30 +10,30 @@ export const defaultBreakpoints = {
   lgDesktop: '1200px',
 };
 
-const createMin = breakpointsMap => breakpointKey => {
-  const ems = pixelsToEm(getBreakValue(breakpointKey, breakpointsMap));
+const createMin = breakpoints => breakpoint => {
+  const ems = pixelsToEm(getBreakValue(breakpoint, breakpoints));
   return `@media screen and (min-width: ${ems})`;
 };
 
-const createMax = breakpointsMap => breakpointKey => {
-  const ems = pixelsToEm(getBelowValue(getNextBreakValue(breakpointKey, breakpointsMap)));
+const createMax = breakpoints => breakpoint => {
+  const ems = pixelsToEm(getBelowValue(getNextBreakValue(breakpoint, breakpoints)));
   return `@media screen and (max-width: ${ems})`;
 };
 
-const createBelow = breakpointsMap => breakpointKey => {
-  const ems = pixelsToEm(getBelowValue(getBreakValue(breakpointKey, breakpointsMap)));
+const createBelow = breakpoints => breakpoint => {
+  const ems = pixelsToEm(getBelowValue(getBreakValue(breakpoint, breakpoints)));
   return `@media screen and (max-width: ${ems})`;
 };
 
-const createBetween = breakpointsMap => (fromBp, toBp) => {
-  const minEms = pixelsToEm(getBreakValue(fromBp, breakpointsMap));
-  const maxEms = pixelsToEm(getBelowValue(getNextBreakValue(toBp, breakpointsMap)));
+const createBetween = breakpoints => (fromBp, toBp) => {
+  const minEms = pixelsToEm(getBreakValue(fromBp, breakpoints));
+  const maxEms = pixelsToEm(getBelowValue(getNextBreakValue(toBp, breakpoints)));
   return `@media screen and (min-width: ${minEms}) and (max-width: ${maxEms})`;
 };
 
-const createOnly = breakpointsMap => breakpointKey => {
-  const minEms = pixelsToEm(getBreakValue(breakpointKey, breakpointsMap));
-  const maxEms = pixelsToEm(getBelowValue(getNextBreakValue(breakpointKey, breakpointsMap)));
+const createOnly = breakpoints => breakpoint => {
+  const minEms = pixelsToEm(getBreakValue(breakpoint, breakpoints));
+  const maxEms = pixelsToEm(getBelowValue(getNextBreakValue(breakpoint, breakpoints)));
   return `@media screen and (min-width: ${minEms}) and (max-width: ${maxEms})`;
 };
 

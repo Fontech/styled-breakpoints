@@ -11,14 +11,14 @@ export const breakpointsToArray = (breakpoints) => {
   return result;
 };
 
-export const getBreakValue = (breakpointValue, breakpoints = {}) => {
+export const getBreakValue = (breakpoint, breakpoints = {}) => {
   let result = null;
 
   try {
-    if (breakpoints[breakpointValue]) {
-      result = breakpoints[breakpointValue];
-    } else if (parseInt(breakpointValue, 10)) {
-      result = breakpointValue;
+    if (breakpoints[breakpoint]) {
+      result = breakpoints[breakpoint];
+    } else if (parseInt(breakpoint, 10)) {
+      result = breakpoint;
     } else {
       throw new Error(
         'styled-breakpoints: No valid breakpoint or size specified for media.',
@@ -34,11 +34,11 @@ export const getBreakValue = (breakpointValue, breakpoints = {}) => {
 export const getNextBreakValue = (breakpoint, breakpoints = {}) => {
   let result = null;
   const breakpointsArray = breakpointsToArray(breakpoints);
-  const breakpointValueInt = parseInt(getBreakValue(breakpoint, breakpoints), 10);
+  const breakpointInt = parseInt(getBreakValue(breakpoint, breakpoints), 10);
 
   try {
     breakpointsArray.forEach(breakpointItem => {
-      if (!result && breakpointValueInt < parseInt(breakpointItem.value, 10)) {
+      if (!result && breakpointInt < parseInt(breakpointItem.value, 10)) {
         result = breakpointItem.value;
       }
     });
@@ -54,10 +54,10 @@ export const getNextBreakValue = (breakpoint, breakpoints = {}) => {
   return result;
 };
 
-export const getBelowValue = (breakpointValue) => {
+export const getBelowValue = (breakpoint) => {
   try {
-    if (breakpointValue) {
-      return `${parseFloat(breakpointValue) - 0.02}px`;
+    if (breakpoint) {
+      return `${parseFloat(breakpoint) - 0.02}px`;
     }
     throw new Error(
       'styled-breakpoints: No valid breakpoint or size specified for media.',
