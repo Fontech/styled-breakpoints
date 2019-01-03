@@ -39,7 +39,7 @@ const defaultBreakpoints = {
 
 ```js
 import styled from 'styled-components';
-import { min, max, below, between, only } from 'styled-breakpoints';
+import { min, max, below, between, only } from '@sorosora/styled-breakpoints';
 
 const SyledComponent = styled.div`
   background-color: pink;
@@ -169,7 +169,32 @@ Converts to:
 }
 ```
 
-### Recommended usage
+### Custom breakpoints
+
+```js
+import styled from 'styled-components';
+import { createBreakpoints } from '@sorosora/styled-breakpoints';
+
+const breakpoints = {
+  phone: '0px', // feel free to set the smallest breakpoint
+  tablet: '768px',
+  desktop: '1200px',
+}
+
+const { min, max, below, between, only } = createBreakpoints(breakpoints);
+
+const StyledComponent = styled.div`
+  background-color: pink;
+
+  ${min('tablet')} {
+    background-color: hotpink;
+  }
+`;
+```
+
+## Recommended usage
+
+### Order of media query
 
 Mobile-first
 
@@ -217,27 +242,44 @@ const StyledComponent = styled.div`
 `;
 ```
 
-### Custom breakpoints
+### With theme
 
 ```js
-import styled from 'styled-components';
-import { createBreakpoints } from 'styled-breakpoints';
+import styled, { ThemeProvider } from 'styled-components';
+import { createBreakpoints } from '@sorosora/styled-breakpoints';
 
-const breakpoints = {
-  phone: '0px', // feel free to set the smallest breakpoint
-  tablet: '768px',
-  desktop: '1200px',
+const { min } = createBreakpoints();
+
+const theme = {
+  media: {
+    sm: min('sm'),
+    md: min('md'),
+    lg: min('lg'),
+    xl: min('xl'),
+    xxl: min('xxl'),
+  },
 }
 
-const { min, max, below, between, only } = createBreakpoints(breakpoints);
+const StyledComponents = styled.div`
+  /* xs */
 
-const StyledComponent = styled.div`
-  background-color: pink;
-
-  ${min('tablet')} {
-    background-color: hotpink;
+  ${({ theme }) => theme.media.sm} {
+    /* sm */
   }
+
+  ${({ theme }) => theme.media.md} {
+    /* md */
+  }
+
+  ...
 `;
+
+export const Layout = () => (
+  <ThemeProvider theme={theme}>
+    <StyledComponents />
+  </ThemeProvider>
+);
+
 ```
 
 ## License
