@@ -5,9 +5,12 @@ import { pixelsToEm, getNextBreakValue, getBreakValue, getBelowValue } from './h
  * @type {Object}
  */
 export const defaultBreakpoints = {
-  tablet: '768px',
-  desktop: '992px',
-  lgDesktop: '1200px',
+  xs: '0px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1600px',
 };
 
 const createMin = breakpoints => breakpoint => {
