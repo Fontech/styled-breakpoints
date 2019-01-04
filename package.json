@@ -1,7 +1,7 @@
 {
-  "name": "styled-breakpoints",
-  "version": "4.0.3",
-  "description": "Simple and powerfull css breakpoints for styled-components",
+  "name": "@sorosora/styled-breakpoints",
+  "version": "5.0.0",
+  "description": "Simple and powerful css breakpoints for styled-components",
   "main": "dist/styled-breakpoints.common.js",
   "module": "dist/styled-breakpoints.es.js",
   "jsnext:main": "dist/styled-breakpoints.es.js",
@@ -26,12 +26,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxinakenty/styled-breakpoints.git"
+    "url": "git+https://github.com/sorosora/styled-breakpoints.git"
   },
   "contributors": [
     "Maxim Alyoshing <mgreen097@gmail.com>",
     "Sergey Sova <mail@sergeysova.com> (https://sergeysova.com)",
-    "Scott Dowding (https://github.com/sdowding)"
+    "Scott Dowding (https://github.com/sdowding)",
+    "Jackson Wang <jackson90295@gmail.com>"
   ],
   "license": "MIT",
   "devDependencies": {
