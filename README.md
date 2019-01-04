@@ -6,9 +6,11 @@ Simple and powerful css breakpoints for [styled-components](https://github.com/s
 
 ## Demo Sandbox
 
-[![Edit @sorosora/styled-breakpoints demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/yqk8445y91)
+<a href="https://codesandbox.io/s/yqk8445y91" target='_blank'>
+  <img alt="Edit @sorosora/styled-breakpoints demo" src="https://codesandbox.io/static/img/play-codesandbox.svg">
+</a>
 
-[fullscreen](https://yqk8445y91.codesandbox.io/)
+<a href="https://yqk8445y91.codesandbox.io/" target='_blank'>fullscreen</a>
 
 ## Installation
 
