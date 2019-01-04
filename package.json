@@ -1,6 +1,6 @@
 {
   "name": "@sorosora/styled-breakpoints",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Simple and powerful css breakpoints for styled-components",
   "main": "dist/styled-breakpoints.common.js",
   "module": "dist/styled-breakpoints.es.js",
