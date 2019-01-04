@@ -177,8 +177,12 @@ Converts to:
 import styled from 'styled-components';
 import { createBreakpoints } from '@sorosora/styled-breakpoints';
 
+ /**
+  * If you use desktop-first RWD, you should set the smallest breakpoint to '0px'
+  * or use below(THE_SECOND_SMALLEST) to represent that one
+  */
 const breakpoints = {
-  phone: '0px', // feel free to set the smallest breakpoint
+  phone: '0px',
   tablet: '768px',
   desktop: '1200px',
 }
