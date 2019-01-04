@@ -70,5 +70,12 @@
       "json",
       "es6"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/sorosora/styled-breakpoints/issues"
+  },
+  "homepage": "https://github.com/sorosora/styled-breakpoints#readme",
+  "dependencies": {
+  },
+  "author": ""
 }
